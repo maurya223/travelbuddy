@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Travel Booking</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    h2 { margin-bottom: 20px; }
+
+    /* Grid for travel options */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .option-btn {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #007bff;
+      color: #fff;
+      transition: 0.3s;
+    }
+    .option-btn:hover { background: #0056b3; }
+
+    /* Booking form */
+    .form-box {
+      max-width: 450px;
+      margin: auto;
+      text-align: left;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select {
+      width: 100%; padding: 10px; margin: 6px 0;
+      border-radius: 6px; border: 1px solid #ccc;
+    }
+    button.submit {
+      background: #28a745; color: white;
+      padding: 12px; width: 100%;
+      border: none; border-radius: 8px;
+      margin-top: 15px;
+      font-size: 16px; cursor: pointer;
+    }
+    button.submit:hover { background: #218838; }
+  </style>
+</head>
+<body>
+
+  <h2>Choose Your Travel Option</h2>
+
+  <!-- Travel Options (24 points) -->
+  <div class="options-grid">
+    <button class="option-btn" onclick="setOption('Bus')">Bus</button>
+    <button class="option-btn" onclick="setOption('Train')">Train</button>
+    <button class="option-btn" onclick="setOption('Flight')">Flight</button>
+    
+  </div>
+
+  <!-- Booking Form -->
+  <div class="form-box">
+    <form method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="transport_type" id="transport_type" value="Bus">
+
+      <label>From:</label>
+      <input type="text" name="from_station" required>
+
+      <label>To:</label>
+      <input type="text" name="to_station" required>
+
+      <label>Journey Date:</label>
+      <input type="date" name="journey_date" required>
+
+      <label>No. of Seats:</label>
+      <input type="number" name="seats" min="1" value="1" required>
+
+      <label>Status:</label>
+      <select name="status">
+        <option value="confirmed">Confirmed</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+
+      <button type="submit" class="submit">Book Now</button>
+    </form>
+  </div>
+
+  <script>
+    function setOption(type) {
+      document.getElementById("transport_type").value = type;
+      alert("You selected: " + type);
+    }
+  </script>
+
+</body>
+</html>

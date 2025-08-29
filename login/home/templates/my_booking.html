@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>My Bookings</h2>
+<ul>
+    {% for booking in bookings %}
+        <li>
+            {{ booking.transport_type }} | 
+            {{ booking.from_station }} → {{ booking.to_station }} | 
+            {{ booking.journey_date }} | 
+            Seats: {{ booking.seats }} | 
+            Status: {{ booking.status }}
+        </li>
+    {% empty %}
+        <li>No bookings found.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

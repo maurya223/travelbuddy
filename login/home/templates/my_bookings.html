@@ -1,0 +1,35 @@
+<h2>👤 {{ request.user.username }}'s Bookings</h2>
+<p>Email: {{ request.user.email }}</p>
+
+{% if bookings %}
+  <table border="1" cellpadding="8">
+    <tr>
+      <th>Type</th>
+      <th>Seats</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+    {% for booking in bookings %}
+    <tr>
+      <td>{{ booking.booking_type }}</td>
+      <td>{{ booking.seats }}</td>
+      <td>{{ booking.booking_date }}</td>
+      <td>{{ booking.status }}</td>
+      <td>
+        {% if booking.status == "Confirmed" %}
+          <a href="{% url 'cancel_booking' booking.id %}" 
+             class="btn btn-danger btn-sm"
+             onclick="return confirm('Are you sure you want to cancel this booking?');">
+             ❌ Cancel
+          </a>
+        {% else %}
+          <span style="color: gray;">Cancelled</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No bookings yet.</p>
+{% endif %}
