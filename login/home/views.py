@@ -66,7 +66,7 @@ def Login_view(request):
 # Home
 def home_view(request):
     if 'user_id' not in request.session:
-        return redirect('login')   
+        return redirect('login')   # ✅ Fix: redirect to login if not logged in
 
     try:
         user = Register.objects.get(id=request.session['user_id'])
@@ -78,7 +78,7 @@ def home_view(request):
 
 # Logout
 def logout_view(request):
-    request.session.flush()  
+    request.session.flush()  # ✅ better than manually deleting keys
     return redirect('login')
 from django.shortcuts import render
 
@@ -137,9 +137,7 @@ def contact_view(request):
         # Save to database
         Contact.objects.create(fullname=fullname, email=email, message=message)
 
-        messages.success(request, " Your message has been sent successfully!")
-        return redirect("contact") 
+        messages.success(request, "✅ Your message has been sent successfully!")
+        return redirect("contact")  # redirect to same page
 
     return render(request, "contact.html")
-
-

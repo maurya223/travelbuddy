@@ -42,16 +42,21 @@ class TravelOption(models.Model):
     def __str__(self):
         return f"{self.type} {self.source} → {self.destination} on {self.date_time}"
 class Booking(models.Model):
-    user = models.ForeignKey("Register", on_delete=models.CASCADE)   # ✅ linked to Register
-    transport_type = models.CharField(max_length=100)
-    from_station = models.CharField(max_length=100)
-    to_station = models.CharField(max_length=100)
-    journey_date = models.DateField()
-    seats = models.IntegerField()
-    status = models.CharField(max_length=20)
+    STATUS_CHOICES = [
+        ('Confirmed', 'Confirmed'),
+        ('Cancelled', 'Cancelled'),
+    ]
 
+    booking_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    travel_option = models.ForeignKey(TravelOption, on_delete=models.CASCADE)
+    number_of_seats = models.PositiveIntegerField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    booking_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Confirmed')
 
-   
+    def __str__(self):
+        return f"Booking {self.booking_id} by {self.user.username}"
 
 
 

@@ -9,7 +9,7 @@ import os
 import sys
 
 # Add your project directory to the sys.path
-path = '/home/maurya223/travelsbuddy-a-website-for-tourist-/login'
+path = '/home/monumaurya/travelsbuddy-a-website-for-tourist-/login'
 if path not in sys.path:
     sys.path.append(path)
 

@@ -122,7 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/maurya223/travelsbuddy-a-website-for-tourist-/static'
+STATIC_ROOT = '/home/monumaurya/travelsbuddy-a-website-for-tourist-/statics'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
